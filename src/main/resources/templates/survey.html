@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Заполнение заявки</title>
+    <th:block th:insert="generic/fragments.html :: headerfiles"></th:block>
+    <style>
+        .loanSurveyForm{
+            margin: 100px;
+        }
+        .loanSurvey{
+            box-shadow: 0px 0px 10px black;
+            padding: 10px;
+        }
+        .name-group{
+            display: flex;
+        }
+        .name-group > div{
+            margin-right: 3%;
+            width: 30%;
+        }
+        .form-group > label{
+            margin-top: 5px;
+            margin-bottom: 5px;
+        }
+        .name-group > div >  label{
+            margin-top: 5px;
+            margin-bottom: 5px;
+        }
+        .form-group{
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+    </style>
+
+
+</head>
+<body>
+<th:block th:insert="generic/fragments.html :: userNavbar"></th:block>
+
+
+<div class="loanSurveyForm">
+    <h1>Заполните анкету для подачи заявления на кредит</h1>
+    <br>
+    <div class="loanSurvey">
+        <form method="post">
+            <div class="form-group">
+                <div class="name-group">
+                    <div>
+                        <label for="surname">Фамилия</label>
+                        <input type="text" class="form-control" id="surname" placeholder="Введите Вашу фамилию">
+                    </div>
+                    <div>
+                        <label for="name">Имя</label>
+                        <input type="text" class="form-control" id="name" placeholder="Введите Ваше имя">
+                    </div>
+                    <div>
+                        <label for="middleName">Отчество</label>
+                        <input type="text" class="form-control" id="middleName" placeholder="Введите Ваше отчество">
+
+                        <div>
+                            <input type="checkbox" class="form-check-input" onclick='toggleMiddleName(this);' id="noMiddleNameCheck">
+                            <label class="form-check-label" for="noMiddleNameCheck" >Нет отчества</label>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="form-group">
+                <h5>Паспортные данные</h5>
+                <div class="name-group">
+                    <div>
+                        <label for="passportSeries">Серия</label>
+                        <input type="text" class="form-control" id="passportSeries" placeholder="XXXX">
+                    </div>
+                    <div>
+                        <label for="passportNumber">Номер</label>
+                        <input type="text" class="form-control" id="passportNumber" placeholder="XXXXXX">
+                    </div>
+                </div>
+                <label for="passportDate">Дата выдачи</label>
+                <input type="date" class="form-control" id="passportDate">
+
+                <label for="passportIssueDepartment">Кем выдан</label>
+                <textarea  class="form-control" id="passportIssueDepartment"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="maritalStatus">Семейное положение</label>
+                <select class="form-control" id="maritalStatus">
+                    <option selected>Выберите из списка</option>
+                    <option>Не замужем / Не женат</option>
+                    <option>Замужем / Женат</option>
+                    <option>Разведен / Разведена</option>
+                    <option>Вдовец / Вдова</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <h5>Адрес прописки</h5>
+                <div class="name-group">
+                    <div>
+                        <label for="country">Страна</label>
+                        <input type="text" class="form-control" id="country" placeholder="XXXX">
+                    </div>
+                    <div>
+                        <label for="city">Город</label>
+                        <input type="text" class="form-control" id="city" placeholder="XXXXXX">
+                    </div>
+                    <div>
+                        <label for="street">Улица</label>
+                        <input type="text" class="form-control" id="street" placeholder="XXXX">
+                    </div>
+                </div>
+                <div class="name-group">
+                    <div>
+                        <label for="building">Дом</label>
+                        <input type="text" class="form-control" id="building" placeholder="XXXXXX">
+                    </div>
+
+                    <div>
+                        <label for="flat">Квартира</label>
+                        <input type="text" class="form-control" id="flat" placeholder="XXXXXX">
+                        <div>
+                            <input type="checkbox" class="form-check-input" onclick='toggleFlat(this);' id="noFlatCheck">
+                            <label class="form-check-label" for="noMiddleNameCheck" >Частный дом</label>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="phoneNumber">Контактный телефон</label>
+                <input type="tel" class="form-control" id="phoneNumber" placeholder="XXXXXXXXXXX">
+            </div>
+
+            <div class="form-group">
+                <h5>Сведения о занятости</h5>
+                <div>
+                    <div class="name-group">
+                        <div>
+                            <label for="position">Должность</label>
+                            <input type="text" class="form-control" id="position" placeholder="XXXXXX">
+                        </div>
+                        <div>
+                            <label for="company">Название организации</label>
+                            <input type="text" class="form-control" id="company" placeholder="XXXX">
+                        </div>
+                    </div>
+                    <div class="name-group">
+                        <div>
+                            <label for="workPeriodStart">Дата устройства на работу</label>
+                            <input type="date" class="form-control" id="workPeriodStart" placeholder="XXXX">
+                        </div>
+                    </div>
+                    <div>
+                        <input type="checkbox" class="form-check-input" onclick='toggleWork(this);' id="notWorking">
+                        <label class="form-check-label" for="notWorking" >Нигде не работаю</label>
+                    </div>
+                </div>
+
+            </div>
+            <div class="form-group">
+                <label for="loanValue">Сумма желаемого кредита (в рублях)</label>
+                <input type="number" min="0" class="form-control" id="loanValue" placeholder="XXXXXXXXXXX">
+            </div>
+
+            <button type="submit" class="btn btn-primary">Отправить</button>
+        </form>
+    </div>
+
+</div>
+
+
+<script>
+
+function toggleWork(cb) {
+    document.getElementById('position').disabled = cb.checked;
+    document.getElementById('company').disabled = cb.checked;
+    document.getElementById('workPeriodStart').disabled = cb.checked;
+}
+function toggleFlat(cb) {
+    document.getElementById('flat').disabled = cb.checked;
+}
+
+function toggleMiddleName(cb) {
+    document.getElementById('middleName').disabled = cb.checked;
+}
+
+
+</script>
+
+</body>
+</html>
