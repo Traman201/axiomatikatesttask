@@ -48,18 +48,18 @@
                 <div class="name-group">
                     <div>
                         <label for="surname">Фамилия</label>
-                        <input type="text" class="form-control" id="surname" placeholder="Введите Вашу фамилию">
+                        <input type="text" name="surname" class="form-control" id="surname" placeholder="Введите Вашу фамилию">
                     </div>
                     <div>
                         <label for="name">Имя</label>
-                        <input type="text" class="form-control" id="name" placeholder="Введите Ваше имя">
+                        <input type="text" name="name" class="form-control" id="name" placeholder="Введите Ваше имя">
                     </div>
                     <div>
                         <label for="middleName">Отчество</label>
-                        <input type="text" class="form-control" id="middleName" placeholder="Введите Ваше отчество">
+                        <input type="text" class="form-control" name="middleName" id="middleName" placeholder="Введите Ваше отчество">
 
                         <div>
-                            <input type="checkbox" class="form-check-input" onclick='toggleMiddleName(this);' id="noMiddleNameCheck">
+                            <input type="checkbox" class="form-check-input" name="noMiddleName" onclick='toggleMiddleName(this);' id="noMiddleNameCheck">
                             <label class="form-check-label" for="noMiddleNameCheck" >Нет отчества</label>
                         </div>
 
@@ -73,27 +73,27 @@
                 <div class="name-group">
                     <div>
                         <label for="passportSeries">Серия</label>
-                        <input type="text" class="form-control" id="passportSeries" placeholder="XXXX">
+                        <input type="text" class="form-control" id="passportSeries" name="passportSeries" placeholder="XXXX">
                     </div>
                     <div>
                         <label for="passportNumber">Номер</label>
-                        <input type="text" class="form-control" id="passportNumber" placeholder="XXXXXX">
+                        <input type="text" class="form-control" id="passportNumber" name="passportNumber" placeholder="XXXXXX">
                     </div>
                 </div>
                 <label for="passportDate">Дата выдачи</label>
-                <input type="date" class="form-control" id="passportDate">
+                <input type="date" class="form-control" name="passportDate" id="passportDate">
 
                 <label for="passportIssueDepartment">Кем выдан</label>
-                <textarea  class="form-control" id="passportIssueDepartment"></textarea>
+                <textarea  class="form-control" id="passportIssueDepartment" name="passportIssueDepartment"></textarea>
             </div>
             <div class="form-group">
                 <label for="maritalStatus">Семейное положение</label>
-                <select class="form-control" id="maritalStatus">
-                    <option selected>Выберите из списка</option>
-                    <option>Не замужем / Не женат</option>
-                    <option>Замужем / Женат</option>
-                    <option>Разведен / Разведена</option>
-                    <option>Вдовец / Вдова</option>
+                <select class="form-control" id="maritalStatus" name="maritalStatus">
+                    <option value="0" selected>Выберите из списка</option>
+                    <option value="1">Не замужем / Не женат</option>
+                    <option value="2">Замужем / Женат</option>
+                    <option value="3">Разведен / Разведена</option>
+                    <option value="4">Вдовец / Вдова</option>
                 </select>
             </div>
             <div class="form-group">
@@ -101,29 +101,29 @@
                 <div class="name-group">
                     <div>
                         <label for="country">Страна</label>
-                        <input type="text" class="form-control" id="country" placeholder="XXXX">
+                        <input type="text" class="form-control" id="country" name="country" placeholder="XXXX">
                     </div>
                     <div>
                         <label for="city">Город</label>
-                        <input type="text" class="form-control" id="city" placeholder="XXXXXX">
+                        <input type="text" class="form-control" id="city" name="city" placeholder="XXXXXX">
                     </div>
                     <div>
                         <label for="street">Улица</label>
-                        <input type="text" class="form-control" id="street" placeholder="XXXX">
+                        <input type="text" class="form-control" id="street" name="street" placeholder="XXXX">
                     </div>
                 </div>
                 <div class="name-group">
                     <div>
                         <label for="building">Дом</label>
-                        <input type="text" class="form-control" id="building" placeholder="XXXXXX">
+                        <input type="text" class="form-control" id="building" name="building" placeholder="XXXXXX">
                     </div>
 
                     <div>
                         <label for="flat">Квартира</label>
-                        <input type="text" class="form-control" id="flat" placeholder="XXXXXX">
+                        <input type="text" class="form-control" id="flat" name="flat" placeholder="XXXXXX">
                         <div>
-                            <input type="checkbox" class="form-check-input" onclick='toggleFlat(this);' id="noFlatCheck">
-                            <label class="form-check-label" for="noMiddleNameCheck" >Частный дом</label>
+                            <input type="checkbox" class="form-check-input" onclick='toggleFlat(this);' name="isHouse" id="noFlatCheck">
+                            <label class="form-check-label" for="noFlatCheck" >Частный дом</label>
                         </div>
 
                     </div>
@@ -131,7 +131,7 @@
             </div>
             <div class="form-group">
                 <label for="phoneNumber">Контактный телефон</label>
-                <input type="tel" class="form-control" id="phoneNumber" placeholder="XXXXXXXXXXX">
+                <input type="tel" class="form-control" id="phoneNumber" name="phoneNumber" placeholder="XXXXXXXXXXX">
             </div>
 
             <div class="form-group">
@@ -140,29 +140,29 @@
                     <div class="name-group">
                         <div>
                             <label for="position">Должность</label>
-                            <input type="text" class="form-control" id="position" placeholder="XXXXXX">
+                            <input type="text" class="form-control" id="position" placeholder="XXXXXX" name="position">
                         </div>
                         <div>
                             <label for="company">Название организации</label>
-                            <input type="text" class="form-control" id="company" placeholder="XXXX">
+                            <input type="text" class="form-control" id="company" placeholder="XXXX" name="company">
                         </div>
                     </div>
                     <div class="name-group">
                         <div>
                             <label for="workPeriodStart">Дата устройства на работу</label>
-                            <input type="date" class="form-control" id="workPeriodStart" placeholder="XXXX">
+                            <input type="date" class="form-control" id="workPeriodStart" placeholder="XXXX" name="workPeriodStart">
                         </div>
                     </div>
                     <div>
-                        <input type="checkbox" class="form-check-input" onclick='toggleWork(this);' id="notWorking">
-                        <label class="form-check-label" for="notWorking" >Нигде не работаю</label>
+                        <input type="checkbox" class="form-check-input" onclick='toggleWork(this);' id="notWorking" name="notWorking">
+                        <label class="form-check-label" for="notWorking" >Безработный</label>
                     </div>
                 </div>
 
             </div>
             <div class="form-group">
                 <label for="loanValue">Сумма желаемого кредита (в рублях)</label>
-                <input type="number" min="0" class="form-control" id="loanValue" placeholder="XXXXXXXXXXX">
+                <input type="number" min="0" class="form-control" id="loanValue" placeholder="XXXXXXXXXXX" name="loanValue">
             </div>
 
             <button type="submit" class="btn btn-primary">Отправить</button>
