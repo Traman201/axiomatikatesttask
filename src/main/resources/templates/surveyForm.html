@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Заполнение заявки</title>
+    <th:block th:insert="generic/fragments.html :: headerfiles"></th:block>
+    <style>
+        .loanSurveyForm{
+            margin: 100px;
+        }
+        .loanSurvey{
+            box-shadow: 0px 0px 10px black;
+            padding: 10px;
+        }
+        .name-group{
+            display: flex;
+        }
+        .name-group > div{
+            margin-right: 3%;
+            width: 30%;
+        }
+        .form-group > label{
+            margin-top: 5px;
+            margin-bottom: 5px;
+        }
+        .name-group > div >  label{
+            margin-top: 5px;
+            margin-bottom: 5px;
+        }
+        .form-group{
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+        .validationError{
+            color: red;
+        }
+    </style>
+
+
+</head>
+<body>
+<th:block th:insert="generic/fragments.html :: userNavbar"></th:block>
+
+
+<div class="loanSurveyForm">
+    <h1>Заполните анкету для подачи заявления на кредит</h1>
+    <br>
+    <div class="loanSurvey">
+        <form method="post" th:object="${survey}">
+            <div class="form-group">
+                <div class="name-group">
+                    <div>
+                        <label for="surname">Фамилия</label>
+                        <input type="text" th:field="*{client.surname}" class="form-control" id="surname" placeholder="Введите Вашу фамилию">
+                        <span class="validationError"
+                              th:if="${#fields.hasErrors('client.surname')}"
+                              th:errors="*{client.surname}">Name Error</span>
+                    </div>
+                    <div>
+                        <label for="name">Имя</label>
+                        <input type="text" class="form-control" id="name" placeholder="Введите Ваше имя" th:field="*{client.name}">
+                        <span class="validationError"
+                              th:if="${#fields.hasErrors('client.name')}"
+                              th:errors="*{client.name}">Name Error</span>
+                    </div>
+                    <div>
+                        <label for="middleName">Отчество</label>
+                        <input type="text" class="form-control" th:field="*{client.middleName}" id="middleName" placeholder="Введите Ваше отчество">
+
+
+                        <div>
+                            <input type="checkbox" class="form-check-input" name="noMiddleName" onclick='toggleMiddleName(this);' id="noMiddleNameCheck" th:field="*{client.noMiddleName}">
+                            <label class="form-check-label" for="noMiddleNameCheck" >Нет отчества</label>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="form-group">
+                <h5>Паспортные данные</h5>
+                <div class="name-group">
+                    <div>
+                        <label for="passportSeries">Серия</label>
+                        <input type="text" class="form-control" id="passportSeries" th:field="*{client.passportSeries}" placeholder="XXXX">
+                        <span class="validationError"
+                              th:if="${#fields.hasErrors('client.passportSeries')}"
+                              th:errors="*{client.passportSeries}">Name Error</span>
+                    </div>
+                    <div>
+                        <label for="passportNumber">Номер</label>
+                        <input type="text" class="form-control" id="passportNumber" th:field="*{client.passportNumber}" placeholder="XXXXXX">
+                        <span class="validationError"
+                              th:if="${#fields.hasErrors('client.passportNumber')}"
+                              th:errors="*{client.passportNumber}">Name Error</span>
+                    </div>
+                </div>
+
+                <div>
+                    <label for="passportDate">Дата выдачи</label>
+                    <input type="date" class="form-control" th:field="*{client.issueDate}" id="passportDate">
+                    <span class="validationError"
+                          th:if="${#fields.hasErrors('client.issueDate')}"
+                          th:errors="*{client.issueDate}">Name Error</span>
+                </div>
+
+                <div>
+                    <label for="passportIssueDepartment">Кем выдан</label>
+                    <textarea  class="form-control" id="passportIssueDepartment" th:field="*{client.issueDepartment}"></textarea>
+                    <span class="validationError"
+                          th:if="${#fields.hasErrors('client.issueDepartment')}"
+                          th:errors="*{client.issueDepartment}">Name Error</span>
+                </div>
+
+            </div>
+            <div class="form-group">
+                <label for="maritalStatus">Семейное положение</label>
+                <select class="form-control" id="maritalStatus" th:field="*{client.maritalStatus}">
+                    <option value="0" selected>Выберите из списка</option>
+                    <option value="1">Не замужем / Не женат</option>
+                    <option value="2">Замужем / Женат</option>
+                    <option value="3">Разведен / Разведена</option>
+                    <option value="4">Вдовец / Вдова</option>
+                </select>
+                <span class="validationError"
+                      th:if="${#fields.hasErrors('client.maritalStatus')}"
+                      th:errors="*{client.maritalStatus}">Name Error</span>
+            </div>
+            <div class="form-group">
+                <h5>Адрес прописки</h5>
+                <div class="name-group">
+                    <div>
+                        <label for="country">Страна</label>
+                        <input type="text" class="form-control" id="country" th:field="*{client.registration.country}" placeholder="XXXX">
+                        <span class="validationError"
+                              th:if="${#fields.hasErrors('client.registration.country')}"
+                              th:errors="*{client.registration.country}">Name Error</span>
+                    </div>
+                    <div>
+                        <label for="city">Город</label>
+                        <input type="text" class="form-control" id="city" th:field="*{client.registration.city}" placeholder="XXXXXX">
+                        <span class="validationError"
+                              th:if="${#fields.hasErrors('client.registration.city')}"
+                              th:errors="*{client.registration.city}">Name Error</span>
+                    </div>
+                    <div>
+                        <label for="street">Улица</label>
+                        <input type="text" class="form-control" id="street" th:field="*{client.registration.street}" placeholder="XXXX">
+                        <span class="validationError"
+                              th:if="${#fields.hasErrors('client.registration.street')}"
+                              th:errors="*{client.registration.street}">Name Error</span>
+                    </div>
+                </div>
+                <div class="name-group">
+                    <div>
+                        <label for="building">Дом</label>
+                        <input type="text" class="form-control" id="building" th:field="*{client.registration.building}" placeholder="XXXXXX">
+                        <span class="validationError"
+                              th:if="${#fields.hasErrors('client.registration.building')}"
+                              th:errors="*{client.registration.building}">Name Error</span>
+                    </div>
+
+                    <div>
+                        <label for="flat">Квартира</label>
+                        <input type="text" class="form-control" id="flat" th:field="*{client.registration.apartment}" placeholder="XXXXXX">
+                        <div>
+                            <input type="checkbox" class="form-check-input" onclick='toggleFlat(this);' th:field="*{client.registration.notApartment}" id="noFlatCheck">
+                            <label class="form-check-label" for="noFlatCheck" >Частный дом</label>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="phoneNumber">Контактный телефон</label>
+                <input type="tel" class="form-control" id="phoneNumber" th:field="*{client.phoneNumber}" placeholder="XXXXXXXXXXX">
+                <span class="validationError"
+                      th:if="${#fields.hasErrors('client.phoneNumber')}"
+                      th:errors="*{client.phoneNumber}">Name Error</span>
+            </div>
+
+            <div class="form-group">
+                <h5>Сведения о занятости</h5>
+                <div>
+                    <div class="name-group">
+                        <div>
+                            <label for="position">Должность</label>
+                            <input type="text" class="form-control" id="position" placeholder="XXXXXX" th:field="*{client.position.name}">
+                            <span class="validationError"
+                                  th:if="${#fields.hasErrors('client.position.name')}"
+                                  th:errors="*{client.position.name}">Name Error</span>
+                        </div>
+                        <div>
+                            <label for="company">Название организации</label>
+                            <input type="text" class="form-control" id="company" placeholder="XXXX" th:field="*{client.position.organisation.name}">
+                            <span class="validationError"
+                                  th:if="${#fields.hasErrors('client.position.organisation.name')}"
+                                  th:errors="*{client.position.organisation.name}">Name Error</span>
+                        </div>
+                    </div>
+                    <div class="name-group">
+                        <div>
+                            <label for="workPeriodStart">Дата устройства на работу</label>
+                            <input type="date" class="form-control" id="workPeriodStart" placeholder="XXXX" th:field="*{client.hireDate}">
+                            <span class="validationError"
+                                  th:if="${#fields.hasErrors('client.hireDate')}"
+                                  th:errors="*{client.hireDate}">Name Error</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="form-group">
+                <label for="loanValue">Сумма желаемого кредита (в рублях)</label>
+                <input type="number" min="0" value="0" class="form-control" id="loanValue" placeholder="XXXXXXXXXXX" th:field="*{amount}">
+                <span class="validationError"
+                      th:if="${#fields.hasErrors('amount')}"
+                      th:errors="*{amount}">Name Error</span>
+            </div>
+            <br>
+            <button type="submit" class="btn btn-primary">Отправить</button>
+        </form>
+    </div>
+
+</div>
+
+
+<script>
+
+function toggleWork(cb) {
+    document.getElementById('position').disabled = cb.checked;
+    document.getElementById('company').disabled = cb.checked;
+    document.getElementById('workPeriodStart').disabled = cb.checked;
+}
+function toggleFlat(cb) {
+    document.getElementById('flat').disabled = cb.checked;
+}
+
+function toggleMiddleName(cb) {
+    document.getElementById('middleName').disabled = cb.checked;
+}
+
+
+</script>
+
+</body>
+</html>

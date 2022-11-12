@@ -10,3 +10,7 @@ spring:
       period: 0
       cache-control:
         max-age=365d: 0
+  datasource:
+    url: jdbc:postgresql:://localhost:5432/loanservice
+    username: loanworker
+    password: password
