@@ -28,16 +28,13 @@ public class Client {
 
     String middleName;
 
-    @NotBlank(message = "Укажите серию паспорта")
     @Pattern(regexp = "\\d{4}", message = "Серия паспорта должна состоять из 4 цифр")
     String passportSeries;
 
     @Id
-    @NotBlank(message = "Укажите номер паспорта")
     @Pattern(regexp = "\\d{6}", message = "Номер паспорта должен состоять из 6 цифр")
     String passportNumber;
 
-    @NotBlank(message = "Укажите дату выдачи паспорта")
     @Pattern(regexp = "^\\d{4}\\-(0?[1-9]|1[012])\\-(0?[1-9]|[12][0-9]|3[01])$", message = "Проверьте правильность указанной даты")
     String issueDate;
 
@@ -50,7 +47,7 @@ public class Client {
     @Valid
     MaritalStatus maritalStatus;
 
-    @NotBlank
+
     @Pattern(regexp = "^[\\+]?[(]?[0-9]{3}[)]?[-\\s\\.]?[0-9]{3}[-\\s\\.]?[0-9]{4,6}$", message = "Укажите номер телефона")
     String phoneNumber;
 
@@ -63,7 +60,6 @@ public class Client {
     @Valid
     Position position;
 
-    @NotBlank(message = "Укажите дату выхода на работу")
     @Pattern(regexp = "^\\d{4}\\-(0?[1-9]|1[012])\\-(0?[1-9]|[12][0-9]|3[01])$", message = "Проверьте правильность указанной даты")
     String hireDate;
 

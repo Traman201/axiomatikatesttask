@@ -12,6 +12,7 @@ import java.sql.Date;
 @Getter
 @Setter
 @Entity
+@Table(name = "survey")
 public class Survey {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
