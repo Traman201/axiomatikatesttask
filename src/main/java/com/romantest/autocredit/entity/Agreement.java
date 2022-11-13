@@ -20,6 +20,8 @@ public class Agreement {
     boolean isApproved;
     int days;
 
+    String date;
+
     boolean isSigned;
 
     String documentPath;

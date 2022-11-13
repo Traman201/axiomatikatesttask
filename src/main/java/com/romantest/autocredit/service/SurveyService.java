@@ -14,6 +14,8 @@ import org.springframework.stereotype.Service;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Random;
 
 @Service
@@ -64,13 +66,16 @@ public class SurveyService {
         agreement.setApproved(random.nextBoolean());
         agreement.setDays(random.nextInt(30, 30 * 12));
         agreement.setSigned(false);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Date today = new Date();
+        agreement.setDate(sdf.format(today));
         if(agreement.isApproved()){
-            agreement.setDocumentPath(generateContract(survey, agreement.getDays()));
+            agreement.setDocumentPath(generateContract(survey, agreement));
         }
         return agreement;
     }
 
-    String generateContract(Survey survey, int days){
+    String generateContract(Survey survey, Agreement a){
         Document doc = new Document();
         String path = "src/main/resources/documents/" + survey.getId() + "_agreement_" + survey.getClient().getSurname() + ".pdf";
         try{
@@ -126,13 +131,13 @@ public class SurveyService {
                     font
             ));
             doc.add(new Paragraph(
-                    "Сроком на  " + days + " дн.",
+                    "Сроком на  " + a.getDays() + " дн.",
                     font
             ));
 
 
             doc.add(new Paragraph(
-               "Дата подписания: " + survey.getDate()
+               "Дата подписания: " + a.getDate()
                     + "\nПодпись _________ " + survey.getClient().getSurname()
                     + " " + survey.getClient().getName().charAt(0) + ". "
                     + (survey.getClient().isNoMiddleName() ? "" : survey.getClient().getMiddleName().charAt(0) + "."),
