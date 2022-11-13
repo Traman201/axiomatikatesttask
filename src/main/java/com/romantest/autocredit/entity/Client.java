@@ -66,7 +66,7 @@ public class Client {
 
     @Override
     public boolean equals(Object obj) {
-        if(obj.getClass() != Client.class){
+        if(obj == null || obj.getClass() != Client.class){
             return false;
         }
         Client client = (Client) obj;

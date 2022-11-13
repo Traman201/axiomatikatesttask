@@ -26,7 +26,7 @@ public class Agreement {
 
     @Override
     public boolean equals(Object obj) {
-        if(obj.getClass() != Agreement.class){
+        if(obj == null || obj.getClass() != Agreement.class){
             return false;
         }
         Agreement a = (Agreement) obj;

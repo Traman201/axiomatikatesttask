@@ -29,7 +29,7 @@ public class Position {
 
     @Override
     public boolean equals(Object obj) {
-        if(obj.getClass() != Position.class){
+        if(obj == null || obj.getClass() != Position.class){
             return false;
         }
         Position p = (Position) obj;

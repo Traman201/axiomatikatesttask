@@ -27,7 +27,7 @@ public class Organisation {
 
     @Override
     public boolean equals(Object obj) {
-        if(obj.getClass() != Organisation.class){
+        if(obj == null || obj.getClass() != Organisation.class){
             return false;
         }
         Organisation o = (Organisation) obj;

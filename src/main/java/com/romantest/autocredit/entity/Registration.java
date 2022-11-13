@@ -39,7 +39,7 @@ public class Registration {
 
     @Override
     public boolean equals(Object obj) {
-        if(obj.getClass() != Registration.class){
+        if(obj == null || obj.getClass() != Registration.class){
             return false;
         }
         Registration r = (Registration) obj;

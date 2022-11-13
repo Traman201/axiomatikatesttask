@@ -41,7 +41,7 @@ public class Survey {
 
     @Override
     public boolean equals(Object obj) {
-        if(obj.getClass() != Survey.class){
+        if(obj == null || obj.getClass() != Survey.class){
             return false;
         }
         Survey s = (Survey) obj;
