@@ -27,11 +27,9 @@ public class Registration {
     @Size(min = 3, message = "Название города проживания должно состоять как минимум из 3 букв")
     String city;
 
-    @NotBlank(message = "Укажите улицу проживания")
     @Size(min = 2, message = "Название улицы проживания должно состоять как минимум из 2 букв")
     String street;
 
-    @NotBlank(message = "Укажите номер дома")
     @Min(value = 1, message = "Проверьте правильность указания номера дома")
     long building;
 
