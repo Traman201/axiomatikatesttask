@@ -16,12 +16,6 @@ public class AgreementController {
     @Autowired
     SurveyService surveyService;
 
-   /* @GetMapping
-    public String agreementListForm(Model model){
-        model.addAttribute("agreements", surveyService.getAgreementDAO().getAll());
-        return "agreementListForm";
-    }*/
-
     @GetMapping
     public String agreementListFormSignedOnly(@RequestParam(required = false, defaultValue = "off") boolean signedOnly, Model model){
         if(signedOnly){
