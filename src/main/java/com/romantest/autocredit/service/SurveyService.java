@@ -96,7 +96,7 @@ public class SurveyService {
             ));
 
             doc.add(new Paragraph(
-                    "Семейное положение: " + survey.getClient().getMaritalStatus().getStatus(),
+                    "Семейное положение: " + StringToMaritalStatusConverter.getMaritalStatus(survey.getClient().getMaritalStatus()),
                     font
             ));
 

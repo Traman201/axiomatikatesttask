@@ -16,4 +16,24 @@ public class StringToMaritalStatusConverter implements Converter<String, Marital
         }
         return null;
     }
+
+    public static String getMaritalStatus(MaritalStatus m){
+        switch (m){
+            case SINGLE -> {
+                return "Не замужем / Не женат";
+            }
+            case MARRIED -> {
+                return "Замужем / Женат";
+            }
+            case DIVORCED -> {
+                return "Разведен / Разведена";
+            }
+            case WIDOW -> {
+                return "Вдовец / Вдова";
+            }
+            default -> {
+                return "Нет данных";
+            }
+        }
+    }
 }
