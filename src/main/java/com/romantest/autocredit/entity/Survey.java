@@ -28,6 +28,9 @@ public class Survey {
     @Valid
     Client client;
 
+    @OneToOne
+    Agreement agreement;
+
 
     @Override
     public String toString() {
