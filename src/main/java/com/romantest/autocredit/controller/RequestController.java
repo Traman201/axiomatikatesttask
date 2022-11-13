@@ -1,19 +1,17 @@
 package com.romantest.autocredit.controller;
 
-import com.itextpdf.text.pdf.qrcode.Mode;
 import com.romantest.autocredit.entity.Survey;
 import com.romantest.autocredit.service.SurveyService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.FileSystemResource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.nio.file.Paths;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 @Controller
 @RequestMapping("/request")
@@ -70,6 +68,9 @@ public class RequestController {
     public @ResponseBody boolean toggleAgreementSign(@RequestParam int id){
         Survey survey = surveyService.getSurveyDAO().getById(id);
         survey.getAgreement().setSigned(!survey.getAgreement().isSigned());
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Date today = new Date();
+        survey.getAgreement().setDate(sdf.format(today));
         surveyService.getAgreementDAO().save(survey.getAgreement());
         return survey.getAgreement().isSigned();
     }

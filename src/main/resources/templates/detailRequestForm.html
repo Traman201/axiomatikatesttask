@@ -82,6 +82,16 @@
     </td>
   </tr>
   <tr>
+    <th scope="row">Дата подписания</th>
+    <th:block th:if="${request.agreement.isSigned}">
+      <td th:text="${request.date}"></td>
+    </th:block>
+    <th:block th:if="${!request.agreement.isSigned}">
+      <td>Отсутствует</td>
+    </th:block>
+
+  </tr>
+  <tr>
     <th scope="row">Договор</th>
     <td>
       <th:block th:if="${request.agreement.isApproved}">
