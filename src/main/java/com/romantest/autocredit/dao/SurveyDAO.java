@@ -52,4 +52,16 @@ public class SurveyDAO implements DAO<Survey, Integer>{
         Session session = sessionFactory.openSession();
         return session.get(Survey.class, id);
     }
+
+    public Survey getByAgreementId(int agreementId){
+        Session session = sessionFactory.openSession();
+        CriteriaBuilder cb = session.getCriteriaBuilder();
+        CriteriaQuery<Survey> cq = cb.createQuery(Survey.class);
+        Root<Survey> root = cq.from(Survey.class);
+        cq.select(root);
+        cq.where(cb.equal(root.get("agreement"), agreementId));
+        TypedQuery<Survey> res = session.createQuery(cq);
+        return res.getSingleResult();
+
+    }
 }

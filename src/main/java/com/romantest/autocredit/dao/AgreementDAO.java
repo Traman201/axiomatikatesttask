@@ -6,6 +6,10 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import java.util.List;
 
 @Repository
@@ -25,11 +29,31 @@ public class AgreementDAO implements DAO<Agreement, Integer> {
 
     @Override
     public List<Agreement> getAll() {
-        return null;
+        Session session = sessionFactory.openSession();
+        CriteriaBuilder cb = session.getCriteriaBuilder();
+        CriteriaQuery<Agreement> cq = cb.createQuery(Agreement.class);
+        Root<Agreement> rootEntry = cq.from(Agreement.class);
+        CriteriaQuery<Agreement> all = cq.select(rootEntry);
+
+        TypedQuery<Agreement> allQuery = session.createQuery(all);
+        return allQuery.getResultList();
     }
 
     @Override
-    public Agreement getById(Integer integer) {
-        return null;
+    public Agreement getById(Integer id) {
+        Session session = sessionFactory.openSession();
+        return session.get(Agreement.class, id);
+    }
+
+    public List<Agreement> getSignedOnly(){
+        Session session = sessionFactory.openSession();
+        CriteriaBuilder cb = session.getCriteriaBuilder();
+        CriteriaQuery<Agreement> cq = cb.createQuery(Agreement.class);
+        Root<Agreement> rootEntry = cq.from(Agreement.class);
+        CriteriaQuery<Agreement> all = cq.select(rootEntry);
+        all.where(cb.equal(rootEntry.get("isSigned"), true));
+
+        TypedQuery<Agreement> allQuery = session.createQuery(all);
+        return allQuery.getResultList();
     }
 }
