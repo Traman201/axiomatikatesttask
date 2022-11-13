@@ -36,4 +36,19 @@ public class Registration {
     long apartment;
 
     boolean notApartment = false;
+
+    @Override
+    public boolean equals(Object obj) {
+        if(obj.getClass() != Registration.class){
+            return false;
+        }
+        Registration r = (Registration) obj;
+        return r.getId() == this.id &&
+                r.getCity().equals(this.city) &&
+                r.getCountry().equals(this.country) &&
+                r.getStreet().equals(this.street) &&
+                r.getBuilding() == this.building &&
+                r.getApartment() == this.apartment &&
+                r.isNotApartment() == this.notApartment;
+    }
 }

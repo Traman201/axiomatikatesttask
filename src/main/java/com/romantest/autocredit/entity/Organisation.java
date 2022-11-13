@@ -6,6 +6,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.util.Objects;
 
 @Entity
 @Getter
@@ -23,4 +24,14 @@ public class Organisation {
     @Column(name = "name")
     String name;
 
+
+    @Override
+    public boolean equals(Object obj) {
+        if(obj.getClass() != Organisation.class){
+            return false;
+        }
+        Organisation o = (Organisation) obj;
+        return o.getId() == this.id &&
+                Objects.equals(o.getName(), this.name);
+    }
 }

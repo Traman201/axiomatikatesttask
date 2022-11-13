@@ -64,6 +64,23 @@ public class Client {
     String hireDate;
 
 
-
-
+    @Override
+    public boolean equals(Object obj) {
+        if(obj.getClass() != Client.class){
+            return false;
+        }
+        Client client = (Client) obj;
+        return client.getName().equals(this.name) &&
+                client.getSurname().equals((this.surname)) &&
+                client.getMiddleName().equals(this.middleName) &&
+                client.getPassportSeries().equals(this.passportSeries) &&
+                client.getPassportNumber().equals(this.passportNumber) &&
+                client.getIssueDate().equals((this.issueDate)) &&
+                client.getIssueDepartment().equals(this.issueDepartment) &&
+                client.getMaritalStatus().equals(this.maritalStatus) &&
+                client.getPhoneNumber().equals(this.phoneNumber) &&
+                client.getRegistration().equals(this.registration) &&
+                client.getPosition().equals(this.position) &&
+                client.hireDate.equals(this.hireDate);
+    }
 }

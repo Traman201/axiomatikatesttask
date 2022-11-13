@@ -15,7 +15,7 @@ import javax.validation.constraints.NotNull;
 public class Survey {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private long id;
 
     String date;
 
@@ -37,5 +37,18 @@ public class Survey {
         return "Client " + client.getName() + " " + client.getSurname() + " " + client.getMiddleName() + "\n" +
                 "Position " + client.getPosition().getOrganisation().getName() + " " + client.getPosition().getName() + "\n" +
                 "Amount " + amount + "\n";
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(obj.getClass() != Survey.class){
+            return false;
+        }
+        Survey s = (Survey) obj;
+        return s.getId() == this.id &&
+                s.getDate().equals(this.date) &&
+                s.getAmount() == this.amount &&
+                s.getClient().equals(this.client) &&
+                s.getAgreement().equals(this.agreement);
     }
 }

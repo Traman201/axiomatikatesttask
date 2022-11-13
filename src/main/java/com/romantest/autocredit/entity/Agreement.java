@@ -22,4 +22,16 @@ public class Agreement {
     boolean isSigned;
 
     String documentPath;
+
+    @Override
+    public boolean equals(Object obj) {
+        if(obj.getClass() != Agreement.class){
+            return false;
+        }
+        Agreement a = (Agreement) obj;
+        return a.getId() == this.id &&
+                a.getDocumentPath().equals(this.documentPath) &&
+                a.isApproved() == this.isApproved &&
+                a.isSigned() == this.isSigned;
+    }
 }

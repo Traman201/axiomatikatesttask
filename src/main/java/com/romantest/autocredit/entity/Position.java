@@ -26,6 +26,17 @@ public class Position {
     @OneToOne(targetEntity = Organisation.class)
     @Valid
     Organisation organisation;
+
+    @Override
+    public boolean equals(Object obj) {
+        if(obj.getClass() != Position.class){
+            return false;
+        }
+        Position p = (Position) obj;
+        return p.getId() == this.id &&
+                p.getName().equals(this.name) &&
+                p.getOrganisation().equals(this.organisation);
+    }
 }
 
 
