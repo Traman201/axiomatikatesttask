@@ -164,6 +164,9 @@
                     <div>
                         <label for="flat">Квартира</label>
                         <input type="text" class="form-control" id="flat" th:field="*{client.registration.apartment}" placeholder="XXXXXX">
+                        <span class="validationError"
+                              th:if="${#fields.hasErrors('client.registration.apartment')}"
+                              th:errors="*{client.registration.apartment}">Name Error</span>
                         <div>
                             <input type="checkbox" class="form-check-input" onclick='toggleFlat(this);' th:field="*{client.registration.notApartment}" id="noFlatCheck">
                             <label class="form-check-label" for="noFlatCheck" >Частный дом</label>
