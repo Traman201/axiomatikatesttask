@@ -62,14 +62,15 @@ public class SurveyService {
     Agreement approve(Survey survey){
         Agreement agreement = new Agreement();
         agreement.setApproved(random.nextBoolean());
+        agreement.setDays(random.nextInt(30, 30 * 12));
         agreement.setSigned(false);
         if(agreement.isApproved()){
-            agreement.setDocumentPath(generateContract(survey));
+            agreement.setDocumentPath(generateContract(survey, agreement.getDays()));
         }
         return agreement;
     }
 
-    String generateContract(Survey survey){
+    String generateContract(Survey survey, int days){
         Document doc = new Document();
         String path = "src/main/resources/documents/" + survey.getId() + "_agreement_" + survey.getDate() + ".pdf";
         try{
@@ -121,7 +122,11 @@ public class SurveyService {
             ));
 
             doc.add(new Paragraph(
-                    "Заявленная сумма кредита: " + survey.getAmount() + "руб.",
+                    "Заявленная сумма кредита: " + survey.getAmount() + " руб.",
+                    font
+            ));
+            doc.add(new Paragraph(
+                    "Сроком на  " + days + " дн.",
                     font
             ));
 

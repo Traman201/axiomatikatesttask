@@ -18,6 +18,7 @@ public class Agreement {
     int id;
 
     boolean isApproved;
+    int days;
 
     boolean isSigned;
 
