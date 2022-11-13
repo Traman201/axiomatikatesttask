@@ -1,5 +1,6 @@
 package com.romantest.autocredit.controller;
 
+import com.romantest.autocredit.entity.Client;
 import com.romantest.autocredit.entity.Survey;
 import com.romantest.autocredit.service.SurveyService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,7 +54,8 @@ public class SurveyController {
             System.out.println(errors.getAllErrors());
             return "surveyForm";
         }
-        if(!surveyService.getClientDAO().getById(survey.getClient().getPassportNumber()).equals(survey.getClient())){
+        Client tmp;
+        if((tmp = surveyService.getClientDAO().getById(survey.getClient().getPassportNumber())) != null && !tmp.equals(survey.getClient())){
             return "redirect:/survey/client";
         }
 
