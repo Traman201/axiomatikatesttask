@@ -22,7 +22,7 @@
   </tr>
   <tr>
     <td>
-      <a th:href="@{/client/{id}(id = ${request.client.passportNumber})}">
+      <a th:href="@{/client?(passportNumber = ${request.client.passportNumber})}">
         <button type="button" class="btn btn-link">Информация о клиенте</button>
       </a>
     </td>
