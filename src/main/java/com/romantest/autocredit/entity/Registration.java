@@ -33,9 +33,9 @@ public class Registration {
 
     @NotBlank(message = "Укажите номер дома")
     @Min(value = 1, message = "Проверьте правильность указания номера дома")
-    String building;
+    long building;
 
-    String apartment;
+    long apartment;
 
     boolean notApartment = false;
 }
