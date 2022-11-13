@@ -4,9 +4,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.util.Objects;
 
 @Entity
 @Getter
@@ -30,10 +30,10 @@ public class Registration {
     @Size(min = 2, message = "Название улицы проживания должно состоять как минимум из 2 букв")
     String street;
 
-    @Min(value = 1, message = "Проверьте правильность указания номера дома")
-    long building;
+    @Size(min = 1, message = "Проверьте правильность указания номера дома")
+    String building;
 
-    long apartment;
+    String apartment;
 
     boolean notApartment = false;
 
@@ -47,8 +47,8 @@ public class Registration {
                 r.getCity().equals(this.city) &&
                 r.getCountry().equals(this.country) &&
                 r.getStreet().equals(this.street) &&
-                r.getBuilding() == this.building &&
-                r.getApartment() == this.apartment &&
+                Objects.equals(r.getBuilding(), this.building) &&
+                Objects.equals(r.getApartment(), this.apartment) &&
                 r.isNotApartment() == this.notApartment;
     }
 }
