@@ -15,7 +15,7 @@ import javax.validation.constraints.NotNull;
 public class Survey {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private int id;
 
     String date;
 
