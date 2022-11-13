@@ -7,7 +7,6 @@ import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-import java.sql.Date;
 
 @Getter
 @Setter
@@ -18,8 +17,7 @@ public class Survey {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-
-    Date date;
+    String date;
 
     @NotNull(message = "Укажите сумму кредита")
     @Min(value = 1, message = "Проверьте правильность написания суммы кредита")
@@ -33,9 +31,8 @@ public class Survey {
 
     @Override
     public String toString() {
-        String str = "Client " + client.getName() + " " + client.getSurname() + " " + client.getMiddleName() + "\n" +
+        return "Client " + client.getName() + " " + client.getSurname() + " " + client.getMiddleName() + "\n" +
                 "Position " + client.getPosition().getOrganisation().getName() + " " + client.getPosition().getName() + "\n" +
                 "Amount " + amount + "\n";
-        return str;
     }
 }
