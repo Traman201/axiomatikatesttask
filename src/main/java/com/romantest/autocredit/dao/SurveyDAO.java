@@ -6,6 +6,10 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -33,11 +37,19 @@ public class SurveyDAO implements DAO<Survey, Integer>{
 
     @Override
     public List<Survey> getAll() {
-        return null;
+        Session session = sessionFactory.openSession();
+        CriteriaBuilder cb = session.getCriteriaBuilder();
+        CriteriaQuery<Survey> cq = cb.createQuery(Survey.class);
+        Root<Survey> rootEntry = cq.from(Survey.class);
+        CriteriaQuery<Survey> all = cq.select(rootEntry);
+
+        TypedQuery<Survey> allQuery = session.createQuery(all);
+        return allQuery.getResultList();
     }
 
     @Override
-    public Survey getById(Integer integer) {
-        return null;
+    public Survey getById(Integer id) {
+        Session session = sessionFactory.openSession();
+        return session.get(Survey.class, id);
     }
 }
