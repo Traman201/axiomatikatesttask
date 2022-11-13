@@ -72,7 +72,7 @@ public class SurveyService {
 
     String generateContract(Survey survey, int days){
         Document doc = new Document();
-        String path = "src/main/resources/documents/" + survey.getId() + "_agreement_" + survey.getDate() + ".pdf";
+        String path = "src/main/resources/documents/" + survey.getId() + "_agreement_" + survey.getClient().getSurname() + ".pdf";
         try{
 
             PdfWriter writer = PdfWriter.getInstance(doc, new FileOutputStream(path));
