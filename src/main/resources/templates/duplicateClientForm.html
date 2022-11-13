@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:insert="generic/fragments.html :: headerfiles"></th:block>
+</head>
+<body>
+<th:block th:insert="generic/fragments.html :: userNavbar"></th:block>
+<div class="alert alert-warning" role="alert">
+    Ошибка. Клиент с указанными данными уже существует. Стоит ли обновить данные?
+</div>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col"></th>
+        <th scope="col">Новые данные</th>
+        <th scope="col">Старые данные</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <th scope="row">Имя</th>
+        <td th:text="${survey.client.name}"></td>
+        <td th:text="${newClient.name}"></td>
+    </tr>
+    <tr>
+        <th scope="row">Фамилия</th>
+        <td th:text="${survey.client.surname}"></td>
+        <td th:text="${newClient.surname}"></td>
+    </tr>
+    <tr>
+        <th scope="row">Отчество</th>
+        <td th:text="${survey.client.middleName}"></td>
+        <td th:text="${newClient.middleName}"></td>
+    </tr>
+    <tr>
+        <th scope="row">Серия паспорта</th>
+        <td th:text="${survey.client.passportSeries}"></td>
+        <td th:text="${newClient.passportSeries}"></td>
+    </tr>
+    <tr>
+        <th scope="row">Номер паспорта</th>
+        <td th:text="${survey.client.passportNumber}"></td>
+        <td th:text="${newClient.passportNumber}"></td>
+    </tr>
+    <tr>
+        <th scope="row">Дата выдачи паспорта</th>
+        <td th:text="${survey.client.issueDate}"></td>
+        <td th:text="${newClient.issueDate}"></td>
+    </tr>
+    <tr>
+        <th scope="row">Подразделение выдачи паспорта</th>
+        <td th:text="${survey.client.issueDepartment}"></td>
+        <td th:text="${newClient.issueDepartment}"></td>
+    </tr>
+    <tr>
+        <th scope="row">Семейное положение</th>
+        <td th:text="${survey.client.maritalStatus.getStatus()}"></td>
+        <td th:text="${newClient.maritalStatus.getStatus()}"></td>
+    </tr>
+    <tr>
+        <th scope="row">Номер телефона</th>
+        <td th:text="${survey.client.phoneNumber}"></td>
+        <td th:text="${newClient.phoneNumber}"></td>
+    </tr>
+    <tr>
+        <th scope="row">Страна проживания</th>
+        <td th:text="${survey.client.registration.country}"></td>
+        <td th:text="${newClient.registration.country}"></td>
+    </tr>
+    <tr>
+        <th scope="row">Город проживания</th>
+        <td th:text="${survey.client.registration.city}"></td>
+        <td th:text="${newClient.registration.city}"></td>
+    </tr>
+    <tr>
+        <th scope="row">Улица проживания</th>
+        <td th:text="${survey.client.registration.street}"></td>
+        <td th:text="${newClient.registration.street}"></td>
+    </tr>
+    <tr>
+        <th scope="row">Номер дома</th>
+        <td th:text="${survey.client.registration.building}"></td>
+        <td th:text="${newClient.registration.building}"></td>
+    </tr>
+    <tr>
+        <th scope="row">Номер квартиры</th>
+        <td th:text="${survey.client.registration.apartment}"></td>
+        <td th:text="${newClient.registration.apartment}"></td>
+    </tr>
+    <tr>
+        <th scope="row">Должность</th>
+        <td th:text="${survey.client.position.name}"></td>
+        <td th:text="${newClient.position.name}"></td>
+    </tr>
+    <tr>
+        <th scope="row">Организация</th>
+        <td th:text="${survey.client.position.organisation.name}"></td>
+        <td th:text="${newClient.position.organisation.name}"></td>
+    </tr>
+    <tr>
+        <th scope="row">Дата устройства на работу</th>
+        <td th:text="${survey.client.hireDate}"></td>
+        <td th:text="${newClient.hireDate}"></td>
+    </tr>
+    <tr>
+        <th scope="row"></th>
+        <td>
+            <form method="post">
+                <button type="submit" class="btn btn-primary">Обновить</button>
+                <input type="hidden" name="update" value="true">
+            </form>
+
+        </td>
+        <td>
+            <form method="post">
+                <button type="submit" class="btn btn-secondary">Не обновлять</button>
+                <input type="hidden" name="update" value="false">
+            </form>
+
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

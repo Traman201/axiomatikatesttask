@@ -19,9 +19,10 @@ public class ClientDAO implements DAO<Client, String>{
         Session session = sessionFactory.openSession();
         session.beginTransaction();
 
-        session.persist(o);
+        session.saveOrUpdate(o);
 
         session.getTransaction().commit();
+
     }
 
     @Override
@@ -31,6 +32,7 @@ public class ClientDAO implements DAO<Client, String>{
 
     @Override
     public Client getById(String s) {
-        return null;
+        Session session = sessionFactory.openSession();
+        return session.get(Client.class, s);
     }
 }

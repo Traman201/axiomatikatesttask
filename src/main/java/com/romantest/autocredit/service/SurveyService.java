@@ -8,6 +8,7 @@ import com.itextpdf.text.pdf.PdfWriter;
 import com.romantest.autocredit.dao.*;
 import com.romantest.autocredit.entity.Agreement;
 import com.romantest.autocredit.entity.Survey;
+import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +17,7 @@ import java.io.FileOutputStream;
 import java.util.Random;
 
 @Service
+@Getter
 public class SurveyService {
 
     @Autowired
