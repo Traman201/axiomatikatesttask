@@ -17,7 +17,7 @@ public class PositionDAO implements DAO<Position, Integer>{
         Session session = sessionFactory.openSession();
         session.beginTransaction();
 
-        session.persist(o);
+        session.saveOrUpdate(o);
 
         session.getTransaction().commit();
     }
