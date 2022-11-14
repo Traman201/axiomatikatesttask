@@ -12,8 +12,10 @@ import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Random;
@@ -77,9 +79,10 @@ public class SurveyService {
 
     String generateContract(Survey survey, Agreement a){
         Document doc = new Document();
-        String path = "src/main/resources/documents/" + survey.getId() + "_agreement_" + survey.getClient().getSurname() + ".pdf";
-        try{
 
+        String path = "src/main/resources/documents/" + survey.getAmount() + "_agreement_" + survey.getClient().getSurname() + ".pdf";
+        try{
+            Files.createDirectories(Paths.get("src/main/resources/documents/"));
             PdfWriter writer = PdfWriter.getInstance(doc, new FileOutputStream(path));
 
             doc.open();
@@ -148,7 +151,7 @@ public class SurveyService {
 
             writer.close();
         }
-        catch (DocumentException | FileNotFoundException e){
+        catch (DocumentException | IOException e){
             System.out.println("Ошибка при создании документа договора");
             return null;
         }
