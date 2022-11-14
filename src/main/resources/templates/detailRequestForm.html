@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <th:block th:insert="generic/fragments.html :: headerfiles"></th:block>
+</head>
+<body>
+<th:block th:insert="generic/fragments.html :: userNavbar"></th:block>
+
+<br>
+<table class="table" style="width: 40%; margin-left: 50px">
+  <tbody>
+  <tr>
+    <th scope="row">Имя клиента</th>
+    <td th:text="${request.client.name}"></td>
+
+
+
+  </tr>
+  <tr>
+    <th scope="row">Фамилия клиента</th>
+    <td th:text="${request.client.surname}"></td>
+  </tr>
+  <tr>
+    <td>
+      <a th:href="@{/client?(passportNumber = ${request.client.passportNumber})}">
+        <button type="button" class="btn btn-link">Информация о клиенте</button>
+      </a>
+    </td>
+    <td></td>
+  </tr>
+  <tr>
+    <th scope="row">Дата подачи заявления</th>
+    <td th:text="${request.date}"></td>
+
+  </tr>
+  <tr>
+    <th scope="row">Заявленная сумма</th>
+    <td th:text="${request.amount} + ' руб.'"></td>
+  </tr>
+  <tr>
+    <th scope="row">Статус одобрения</th>
+    <td>
+      <th:block th:if="${request.agreement.isApproved}">
+        <div class="alert alert-success" role="alert">
+          Одобрено
+        </div>
+      </th:block>
+      <th:block th:if="${!request.agreement.isApproved}">
+        <div class="alert alert-danger" role="alert">
+          Не одобрено
+        </div>
+      </th:block>
+    </td>
+
+  </tr>
+  <tr>
+    <th scope="row">Предлагаемый срок</th>
+    <td>
+      <th:block th:if="${request.agreement.isApproved}">
+        <p th:text="${request.agreement.days} + ' дн.'"></p>
+      </th:block>
+      <th:block th:if="${!request.agreement.isApproved}">
+        <div class="alert alert-danger" role="alert">
+          Не одобрено
+        </div>
+      </th:block>
+    </td>
+  </tr>
+  <tr>
+    <th scope="row">Статус договора</th>
+    <td id="signStatus">
+      <th:block th:if="${request.agreement.isSigned}">
+        <div class="alert alert-info" role="alert">
+          Подписан
+        </div>
+      </th:block>
+      <th:block th:if="${!request.agreement.isSigned}">
+        <div class="alert alert-secondary" role="alert">
+          Не подписан
+        </div>
+      </th:block>
+    </td>
+  </tr>
+  <tr>
+    <th scope="row">Дата подписания</th>
+    <th:block th:if="${request.agreement.isSigned}">
+      <td th:text="${request.date}"></td>
+    </th:block>
+    <th:block th:if="${!request.agreement.isSigned}">
+      <td>Отсутствует</td>
+    </th:block>
+
+  </tr>
+  <tr>
+    <th scope="row">Договор</th>
+    <td>
+      <th:block th:if="${request.agreement.isApproved}">
+        <a th:href="@{|/request/download?id=${request.id}|}">
+          <button type="button" class="btn btn-link">Скачать</button>
+        </a>
+      </th:block>
+      <th:block th:if="${!request.agreement.isApproved}">
+        Отсутствует
+      </th:block>
+
+
+      </a>
+    </td>
+
+  </tr>
+  <tr>
+    <th scope="row">Изменить статус подписи</th>
+    <td id="toggleButton">
+      <th:block th:if="${request.agreement.isApproved}">
+        <th:block th:if="${!request.agreement.isSigned}">
+            <button type="button" class="btn btn-primary" onclick="toggleSign(this)" >Подписать</button>
+        </th:block>
+        <th:block th:if="${request.agreement.isSigned}">
+          <button  type="button" class="btn btn-danger" onclick="toggleSign(this)" >Расторгнуть</button>
+        </th:block>
+      </th:block>
+
+      <th:block th:if="${!request.agreement.isApproved}">
+        Невозможно изменить статус подписи
+      </th:block>
+      </a>
+    </td>
+  </tr>
+
+  </tbody>
+</table>
+
+<script>
+var index = window.location.pathname.split("/")[2]
+function toggleSign(cb) {
+    $.ajax({
+        type: "POST",
+        url: "/request/change",
+        data: jQuery.param({id: index}),
+
+        success: function(response){
+          if(response){
+              $('#toggleButton').html(
+                  '<button  type="button" class="btn btn-danger" onclick="toggleSign(this)" >Расторгнуть</button>'
+              );
+              $('#signStatus').html(
+                  '<div class="alert alert-info" role="alert">Подписан</div>'
+              );
+
+          }
+          else{
+          $('#toggleButton').html(
+                  '<button type="button" class="btn btn-primary" onclick="toggleSign(this)" >Подписать</button>'
+              );
+              $('#signStatus').html(
+                  '<div class="alert alert-secondary" role="alert">Не подписан</div>'
+              );
+          }
+
+         }
+    });
+}
+
+</script>
+</body>
+</html>

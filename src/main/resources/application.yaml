@@ -1,0 +1,12 @@
+spring:
+  thymeleaf: # Thymeleaf
+    cache: false
+    mode: HTML
+    encoding: UTF-8
+    prefix: file:src/main/resources/templates/
+  resources: # Static resources
+    static-locations: classpath:static/
+    cache:
+      period: 0
+      cache-control:
+        max-age=365d: 0

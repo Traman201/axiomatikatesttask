@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <th:block th:insert="generic/fragments.html :: headerfiles"></th:block>
+</head>
+<body>
+<th:block th:insert="generic/fragments.html :: userNavbar"></th:block>
+<div style="margin: 20px; width: 60%">
+  <form  method="get">
+    <h4>Поиск клиентов</h4>
+    <div class="form-check">
+      <div class="name-group">
+        <div>
+          <label for="surname">Фамилия</label>
+          <input type="text" class="form-control" id="surname" name="surname" placeholder="Фамилия" th:value="${#httpServletRequest.getParameter('surname')}">
+        </div>
+        <div>
+          <label for="name">Имя</label>
+          <input type="text" class="form-control" id="name" name="name" placeholder="Имя" th:value="${#httpServletRequest.getParameter('name')}">
+        </div>
+        <div>
+          <label for="middleName">Отчество</label>
+          <input type="text" class="form-control" id="middleName" name="middleName" placeholder="Отчество" th:value="${#httpServletRequest.getParameter('middleName')}">
+        </div>
+
+      </div>
+      <div class="name-group">
+        <div>
+          <label for="passportSeries">Серия паспорта</label>
+          <input type="text" class="form-control" id="passportSeries" name="passportSeries"  placeholder="XXXX" th:value="${#httpServletRequest.getParameter('passportSeries')}">
+        </div>
+        <div>
+          <label for="passportNumber">Номер паспорта</label>
+          <input type="text" class="form-control" id="passportNumber" name="passportNumber" placeholder="XXXXXX" th:value="${#httpServletRequest.getParameter('passportNumber')}">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="phoneNumber">Контактный телефон</label>
+        <input type="tel" class="form-control" id="phoneNumber" name="phoneNumber" placeholder="XXXXXXXXXXX" th:value="${#httpServletRequest.getParameter('phoneNumber')}">
+      </div>
+    </div>
+    <br>
+    <button type="submit" class="btn btn-primary">Применить</button>
+  </form>
+  <br>
+  <a th:href="@{/client}">
+    <button class="btn btn-warning">Сбросить</button>
+  </a>
+</div>
+<h4 style="margin-left: 25px">Список клиентов</h4>
+<br>
+<table class="table">
+  <thead>
+  <tr>
+    <th scope="col">Имя</th>
+    <th scope="col">Фамилия</th>
+    <th scope="col">Отчество</th>
+    <th scope="col">Номер паспорта</th>
+    <th scope="col">Серия паспорта</th>
+    <th scope="col">Дата выдачи паспорта</th>
+    <th scope="col">Подразделение выдачи паспорта</th>
+    <th scope="col">Семейное положение</th>
+    <th scope="col">Номер телефона</th>
+    <th scope="col">Адрес регистрации</th>
+    <th scope="col">Должность</th>
+    <th scope="col">Дата устройства на работу</th>
+
+  </tr>
+  </thead>
+  <tbody>
+  <th:block th:each="client : ${clients}">
+    <tr>
+      <th scope="row" th:text="${client.name}"></th>
+      <th scope="row" th:text="${client.surname}"></th>
+        <th:block th:if="${client.noMiddleName}">
+      <th scope="row">Без отчества</th>
+        </th:block>
+        <th:block th:if="${!client.noMiddleName}">
+          <th scope="row" th:text="${client.middleName}"></th>
+        </th:block>
+      <th scope="row" th:text="${client.passportNumber}"></th>
+      <th scope="row" th:text="${client.passportSeries}"></th>
+      <th scope="row" th:text="${client.issueDate}"></th>
+      <th scope="row" th:text="${client.issueDepartment}"></th>
+      <th scope="row" th:text="${client.maritalStatus.convertStatus()}"></th>
+      <th scope="row" th:text="${client.phoneNumber}"></th>
+      <th scope="row">
+        <p th:text="${client.registration.country} + ','"></p>
+        <p th:text="'г. ' + ${client.registration.city} + ','"></p>
+        <p th:text="'ул. ' + ${client.registration.street} + ','"></p>
+        <p th:text="'д. ' + ${client.registration.building} + ','"></p>
+        <th:block th:if="${client.registration.notApartment}">
+            <p scope="row">Частный дом</p>
+        </th:block>
+        <th:block th:if="${!client.registration.notApartment}">
+          <p th:text="'кв. ' + ${client.registration.apartment} + ','"></p>
+        </th:block>
+      </th>
+      <th scope="row">
+        <p th:text="${client.position.name} + ','"></p>
+        <p th:text="${client.position.organisation.name}"></p>
+      </th>
+      <th scope="row" th:text="${client.hireDate}"></th>
+    </tr>
+
+  </th:block>
+  </tbody>
+</table>
+
+</body>
+</html>

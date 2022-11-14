@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <th:block th:insert="generic/fragments.html :: headerfiles"></th:block>
+</head>
+<body>
+<th:block th:insert="generic/fragments.html :: userNavbar"></th:block>
+<br>
+<table class="table">
+  <thead>
+  <tr>
+    <th scope="col">#</th>
+    <th scope="col">Сумма</th>
+    <th scope="col">Дата заявки</th>
+    <th scope="col">Статус одобрения</th>
+    <th scope="col"> </th>
+  </tr>
+  </thead>
+  <tbody>
+  <th:block th:each="request : ${requests}">
+    <tr>
+      <th scope="row" th:text="${request.id}"></th>
+      <td th:text="${request.amount}"></td>
+      <td th:text="${request.date}"></td>
+      <td>
+        <th:block th:if="${request.agreement.isApproved}">
+          <div class="alert alert-success" role="alert">
+            Одобрено
+          </div>
+        </th:block>
+        <th:block th:if="${!request.agreement.isApproved}">
+          <div class="alert alert-danger" role="alert">
+            Не одобрено
+          </div>
+        </th:block>
+
+      </td>
+      <td>
+        <a th:href="@{/request/{id}(id = ${request.id})}">
+          <button type="button" class="btn btn-link">Просмотр</button>
+        </a>
+
+
+      </td>
+    </tr>
+  </th:block>
+  </tbody>
+</table>
+
+</body>
+</html>
