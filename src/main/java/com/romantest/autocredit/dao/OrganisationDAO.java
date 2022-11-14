@@ -18,7 +18,7 @@ public class OrganisationDAO  implements DAO<Organisation, String> {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
 
-        session.persist(o);
+        session.saveOrUpdate(o);
 
         session.getTransaction().commit();
 

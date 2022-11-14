@@ -33,7 +33,7 @@ public class SurveyController {
     }
 
     @PostMapping("/client")
-    public String updateClient(@RequestParam boolean update, @SessionAttribute("survey") Survey survey, SessionStatus sessionStatus){
+    public String updateClient(@RequestParam(defaultValue = "off", required = false) boolean update, @SessionAttribute("survey") Survey survey, SessionStatus sessionStatus){
         if(!update){
             survey.setClient(surveyService.getClientDAO().getById(survey.getClient().getPassportNumber()));
         }

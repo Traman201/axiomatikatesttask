@@ -18,7 +18,7 @@ public class RegistrationDAO implements DAO<Registration, Integer>{
         Session session = sessionFactory.openSession();
         session.beginTransaction();
 
-        session.persist(o);
+        session.saveOrUpdate(o);
 
         session.getTransaction().commit();
     }
